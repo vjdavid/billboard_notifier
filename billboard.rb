@@ -1,11 +1,8 @@
-require 'httparty'
+require 'net/http'
 require 'json'
 require_relative 'email_config'
 
-base_uri = 'http://www.cinepolis.com/manejadores/CarteleraPreventas.ashx?CP=CinepolisMX'
-
-   response = HTTParty.get(base_uri)
-parsed_body = JSON.parse(response.parsed_response[16...-1])
+parsed_body = JSON.parse(Net::HTTP.get(URI('http://www.cinepolis.com/manejadores/CarteleraPreventas.ashx?CP=CinepolisMX'))[16...-1])
 
 mail = Mail.new do
   from    'example@example.com'
