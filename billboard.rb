@@ -21,8 +21,18 @@ class Billboard
     end
 
     parsed_body.each do |title|
-       mail.deliver! if title["Titulo"].match(/batman/i) || title['Titulo'].match(/superman/i)
+      mail.deliver! if title["Titulo"].match(/batman/i) || title['Titulo'].match(/superman/i)
     end
+  end
+
+  def movie_list(movie)
+    show_movies.map do |x|
+      x.class
+    end
+  end
+
+  def show_movies
+    parsed_body.map { |title| title['Titulo'] }
   end
 
 end
