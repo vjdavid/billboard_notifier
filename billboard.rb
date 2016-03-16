@@ -26,8 +26,15 @@ class Billboard
   end
 
   def movie_list(movie)
+    mail = Mail.new do
+      from    'example@example.com'
+      to      'example@example.com'
+      subject 'Currently your movie is on presale'
+      body    'Whooraay gohead and enjoy!'
+    end
+
     show_movies.map do |x|
-      x.class
+      mail.deliver! if x.match(/#{movie}/i)
     end
   end
 
