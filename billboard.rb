@@ -2,7 +2,7 @@ require 'net/http'
 require 'json'
 require_relative 'email_config'
 
-class Billboard
+class Billboard < EmailConfig
 
   def uri
     'http://www.cinepolis.com/manejadores/CarteleraPreventas.ashx?CP=CinepolisMX'
@@ -13,20 +13,18 @@ class Billboard
   end
 
   def movie_list(movie)
-    mail = Mail.new do
-      from    'example@example.com'
-      to      'example@example.com'
-      subject 'Currently your movie is on presale'
-      body    'Whooraay gohead and enjoy!'
-    end
-
     show_movies.map do |x|
-      mail.deliver! if x.match(/#{movie}/i)
+      send_email if x.match(/#{movie}/i)
     end
   end
 
   def show_movies
     parsed_body.map { |title| title['Titulo'] }
+  end
+
+  private
+  def send_email
+    super
   end
 
 end
