@@ -13,3 +13,8 @@ I personally, use this script when I want know when comes out some favorite of t
 
 ##### private methods
 `send_email` Send email to the contact seted on the configuration.
+
+### Configuration
+
+Just you need set the API_KEYS of Mandrill, or if you want you can use the Gmail
+as SMTP, service that archive is called this on the root folder `email_config.rb`.
