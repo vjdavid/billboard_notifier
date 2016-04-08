@@ -13,7 +13,7 @@ class Billboard < EmailConfig
   end
 
   def movie_list(movie)
-    show_movies.map do |x|
+    show_movies.select do |x|
       send_email if x.match(/#{movie}/i)
     end
   end
